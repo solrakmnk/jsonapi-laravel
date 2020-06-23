@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\JsonAPi\JsonApiBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+       // Builder::mixin(new JsonApiBuilder);
+        /*
         Builder::macro('jsonPaginate', function () {
             return $this->paginate(
                 request('page.size'),
@@ -32,5 +35,6 @@ class AppServiceProvider extends ServiceProvider
                 request('page.number')
             )->appends(request()->except('page.number'));
         });
+*/
     }
 }

@@ -13,7 +13,7 @@ class ArticleController extends Controller
     public function index()
     {
        // dd(request());
-        $articles = Article::applySorts(request('sort'))
+        $articles = Article::applyFilters()->applySorts()
             ->jsonPaginate();
 
         return ArticleResource::collection($articles);
