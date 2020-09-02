@@ -107,4 +107,65 @@ class FilterArticlesTest extends TestCase
 
         $this->getJson($url)->assertStatus(400);
     }
+
+    /** @test */
+    public function can_search_articles_by_title_and_content()
+    {
+        factory(Article::class)->create([
+            'title' => 'Article from Aprendible',
+            'content' => 'aprendible'
+        ]);
+
+        factory(Article::class)->create([
+            'title' => 'Article from 2021',
+            'content' => 'aprendible 2021'
+        ]);
+
+        factory(Article::class)->create([
+            'title' => 'Titulo del articulo',
+            'content' => 'otro contenido de 2021'
+        ]);
+
+        $url = route('api.v1.articles.index', ['filter[search]' => 'aprendible']);
+
+        $this->getJson($url)
+            ->assertJsonCount(2, 'data')
+            ->assertSee('Article from Aprendible')
+            ->assertSee('Article from 2021')
+            ->assertDontSee('Titulo del articulo')
+        ;
+    }
+
+    /** @test */
+    public function can_search_articles_by_title_and_content_with_multiple_terms()
+    {
+        factory(Article::class)->create([
+            'title' => 'Article from Aprendible',
+            'content' => '2021 aprendible content'
+        ]);
+
+        factory(Article::class)->create([
+            'title' => 'Article from 2021',
+            'content' => ' content aprendible 2021'
+        ]);
+
+        factory(Article::class)->create([
+            'title' => 'Titulo del articulo',
+            'content' => 'otro contenido de 2021'
+        ]);
+
+        factory(Article::class)->create([
+            'title' => 'Titulo del articulo 2020',
+            'content' => 'otro contenido de 2020'
+        ]);
+
+        $url = route('api.v1.articles.index', ['filter[search]' => 'aprendible 2021']);
+
+        $this->getJson($url)
+            ->assertJsonCount(3, 'data')
+            ->assertSee('Article from Aprendible')
+            ->assertSee('Article from 2021')
+            ->assertSee('Titulo del articulo')
+        ;
+    }
 }
