@@ -50,7 +50,7 @@ return [
     | different here. E.g. `App\Models`.
     |
     */
-    'model-namespace' => 'App/Models',
+    'model-namespace' => 'App\Models',
 
     /*
     |--------------------------------------------------------------------------

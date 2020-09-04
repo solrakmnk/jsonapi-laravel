@@ -19,7 +19,7 @@ class SortArticlesTest extends TestCase
 
         $url = route('api.v1.articles.index', ['sort' => 'title']);
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'A Title',
             'B Title',
             'C Title',
@@ -35,7 +35,7 @@ class SortArticlesTest extends TestCase
 
         $url = route('api.v1.articles.index', ['sort' => '-title']);
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'C Title',
             'B Title',
             'A Title',
@@ -60,7 +60,7 @@ class SortArticlesTest extends TestCase
 
         $url = route('api.v1.articles.index').'?sort=title,-content';
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'A Title',
             'B Title',
             'C Title',
@@ -68,7 +68,7 @@ class SortArticlesTest extends TestCase
 
         $url = route('api.v1.articles.index').'?sort=-content,title';
 
-        $this->getJson($url)->assertSeeInOrder([
+        $this->jsonApi()->get($url)->assertSeeInOrder([
             'D content',
             'C content',
             'B content',
@@ -82,6 +82,6 @@ class SortArticlesTest extends TestCase
 
         $url = route('api.v1.articles.index').'?sort=unknown';
 
-        $this->getJson($url)->assertStatus(400);
+        $this->jsonApi()->get($url)->assertStatus(400);
     }
 }

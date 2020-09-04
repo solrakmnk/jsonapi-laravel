@@ -8,8 +8,6 @@ use Illuminate\Support\Str;
 
 class Article extends Model
 {
-
-    public $allowedSorts = ['title', 'content'];
     /**
      * The attributes that aren't mass assignable.
      *

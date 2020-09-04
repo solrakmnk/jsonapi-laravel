@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\JsonAPi\JsonApiBuilder;
+use CloudCreativity\LaravelJsonApi\LaravelJsonApi;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        LaravelJsonApi::defaultApi('v1');
        // Builder::mixin(new JsonApiBuilder);
         /*
         Builder::macro('jsonPaginate', function () {
