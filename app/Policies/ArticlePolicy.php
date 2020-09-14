@@ -11,6 +11,13 @@ class ArticlePolicy
 
     public function update(User $user, $article)
     {
-        return $user->id === $article->user_id;
+        return $article->user->is($user);
+        //return $user->id === $article->user_id;
+    }
+
+    public function delete(User $user, $article)
+    {
+        return $article->user->is($user);
+        //return $user->id === $article->user_id;
     }
 }
