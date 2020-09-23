@@ -27,6 +27,12 @@ class Adapter extends AbstractAdapter
     protected $filterScopes = [];
 
     /**
+     * @var string[]
+     */
+    protected $includePaths=[
+        'authors'=>'user'
+    ];
+    /**
      * Adapter constructor.
      *
      * @param StandardStrategy $paging

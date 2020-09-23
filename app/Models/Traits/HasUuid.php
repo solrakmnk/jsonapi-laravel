@@ -13,6 +13,9 @@ trait HasUuid
     {
         return false;
     }
+    public function getKeyType(){
+        return 'string';
+    }
 
     protected static function bootHasUuid()
     {
