@@ -25,6 +25,7 @@ class DeleteArticleTest extends TestCase
     public function authenticated_users_can_delete_their_articles()
     {
         $article = factory(Article::class)->create();
+
         Sanctum::actingAs($article->user);
 
         $this->jsonApi()->delete(route('api.v1.articles.delete', $article))
